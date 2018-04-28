@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <!-- type 商品类型，用于扩展  1为 钻石
+    id 商品的id 在元素节点内不重复
+    price 价格
+    num1  数量
+    num2  附赠的数量，允许为空
+    -->
+    <type id="1">
+        <shop id="" name="" price="" num1="" num2=""/>
+        <shop id="" name="" price="" num1="" num2=""/>
+        <shop id="" name="" price="" num1="" num2=""/>
+        <shop id="" name="" price="" num1="" num2=""/>
+        <shop id="" name="" price="" num1="" num2=""/>
+        <shop id="" name="" price="" num1="" num2=""/>
+    </type>    
+</config>
