@@ -1,0 +1,164 @@
+syntax = "proto3";
+
+package permanent;
+
+
+message Tuple
+{
+    int32 first     = 1;
+    int32 second    = 2;
+    int32 third     = 3;
+}
+
+message KeyList
+{
+    reserved 4 to 20;
+
+    int32 k     = 1;
+    int32 f0    = 2;
+    int32 f1    = 3;
+}
+
+
+message ClientData
+{
+    message G13history
+    {
+        message Detail
+        {
+            message Opponent
+            {
+                int64   cuid    = 1;
+                string  name    = 2;
+                int32   rank    = 3;
+            }
+
+            int32 roomid    = 1;
+            int32 rank      = 2;
+            int32 time      = 3;
+            repeated Opponent opps = 4;
+        }
+
+        repeated Detail details = 1;
+        int32 week_rank         = 2;
+        int32 week_game         = 3;
+        int32 today_rank        = 4;
+        int32 today_game        = 5;
+
+        message DayRank
+        {
+            int32 rank = 1;
+            int32 game = 2;
+            int32 time = 3;
+        }
+        repeated DayRank his_days = 6;
+    }
+
+    message ShareByWeChat
+    {
+        int32 time    = 1;
+    }
+
+    reserved 11;
+
+    string  openid  = 1;
+    int64   cuid    = 2;
+    string  name    = 3;
+    uint32  roomid  = 4;
+    int32   money   = 6;
+    int32   money1  = 7;
+    string  token   = 8;
+    string  imgurl  = 9;
+    int32   sex     = 10;
+    G13history g13his = 12;
+    ShareByWeChat share_by_wechat    = 13;
+}
+
+message GameRoom
+{
+    reserved 2;
+
+    uint32  roomid      = 1;
+    uint32  type        = 3;
+    uint64  owner_cuid  = 4;
+    G13Data g13data     = 5;
+}
+
+message G13Data
+{
+    message G13PlayerSettleData
+    {
+        message PlayerData
+        {
+            reserved 6, 7 ,8;
+
+            int64 cuid              = 1;
+            repeated int32 cards    = 2;
+            Tuple  dun0             = 3;
+            Tuple  dun1             = 4;
+            Tuple  dun2             = 5;
+            int32 spec              = 9;
+            int32 prize             = 10;
+            repeated KeyList losers = 11;
+            bool quanleida          = 12;
+            bool hasmapai           = 13;
+        }
+
+        repeated PlayerData players = 1;
+    }
+
+    message G13Player
+    {
+        reserved 7, 8;
+        int64   cuid    = 1;
+        string  name    = 2;
+        string  imgurl  = 3;
+        int32   status  = 4;
+        int32   vote    = 5;
+        int32   rank    = 6;
+        bool   cards_spec_brand = 9;
+        repeated int32  cards   = 10;
+        int32   chipin    = 11;
+        int32   multiple  = 12;
+        bool    renew_reply= 13;
+    }
+
+    message G13Attr
+    {
+        int32   play_type   = 1;
+        int32   payor       = 2;
+        int32   daqiang     = 3;
+        int32   rounds      = 4;
+        int32   size        = 5;
+        int32   ma_pai      = 6;
+        bool    is_crazy    = 7;
+        bool    half_enter  = 8;
+        bool    with_ghost  = 9;
+        int32   banker_multiple  = 10;
+        int32   price       = 11;
+        repeated int32  suits_color   = 12;
+        int32   gold_place  = 13;
+        int32   place_type  = 14;
+    }
+
+    reserved 13, 14, 15, 16;
+
+    int32 status            = 1;
+    int32 rounds            = 2;
+    int32 start_vote_time   = 3;
+    int32 vote_sponsor_cuid = 4;
+    int32 settle_all_time   = 5;
+    int32 quick_start_time  = 6;
+    int32 sel_banker_time   = 7;
+    int32 banker_cuid       = 8;
+    int32 sel_multiple_time = 9;
+    int32 settle_time       = 10;
+    int32 new_owner_id = 11;
+    repeated int32 remain_brands = 12;
+    G13Attr attr            = 17;
+    repeated G13Player           players = 18;
+    repeated G13PlayerSettleData settles = 19;
+}
+
+
+

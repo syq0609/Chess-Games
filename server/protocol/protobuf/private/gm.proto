@@ -1,0 +1,17 @@
+syntax = "proto2";
+
+package PrivateProto;
+
+message Ping
+{
+    required string msg = 1;
+}
+
+message Pong
+{
+    required string msg = 2;
+}
+
+message LoadGameConfig
+{
+}

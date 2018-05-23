@@ -1,0 +1,58 @@
+##ignore this file##
+*_exec
+tags
+installed
+water/libs/google_protobuf/protobuf-3.3.0/
+water/libs/hiredis/hiredis/
+water/libs/mysql++/mysql++-3.2.3/
+
+config/protobuf.codedef.private.xml
+config/protobuf.codedef.public.xml
+*.codedef.h
+protobuf.codedef.xml
+codedef.*.cpp
+*.codedef.*.h
+rawmsg.codedef.*.xml
+protobuf.codedef*.json
+log
+
+##filter databfile、sln file##
+*.mdb
+*.ldb
+*.sln
+##class file##
+*.out
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.a
+*.so
+*.d
+*.d.*
+*.pb.h
+*.pb.cc
+*.pb.o
+# compression file #
+*.7z
+*.dmg
+# *.gz  
+*.iso
+*.jar
+*.rar
+# *.tar  
+*.zip
+*.via
+*.tmp
+*.err
+# OS generated files #  
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
+

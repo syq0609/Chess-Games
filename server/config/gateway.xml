@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <mysql dbName="shiyouyule" host ="127.0.0.1" userName="root" pwd="root" port="3306"/>
+</root>

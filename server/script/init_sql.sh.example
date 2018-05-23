@@ -1,0 +1,54 @@
+#!/bin/bash
+
+PROJECT_ROOT_DIR=$(pwd)/..
+SQL_ROOT_DIR=${PROJECT_ROOT_DIR}/sql
+
+HOSTNAME="127.0.0.1"
+PORT="3306"
+USERNAME="water"
+PASSWORD="111111"
+
+DBNAME="game"
+
+#要导入的sql语句文件
+CREATE_TABLES_SQL="create_table.sql"
+ALTER_TABLES_SQL="alter.sql"
+
+#链接数据库
+MYSQL_CMD="mysql -h${HOSTNAME} -P${PORT} -u${USERNAME} -p${PASSWORD}"
+echo ${MYSQL_CMD}
+
+#删除数据库
+DROP_DB_SQL="DROP DATABASE IF EXISTS ${DBNAME}"
+echo ${DROP_DB_SQL} | ${MYSQL_CMD}
+
+#创建数据库
+echo "create database ${DBNAME}"
+CREATE_DB_SQL="CREATE DATABASE IF NOT EXISTS ${DBNAME} DEFAULT CHARACTER SET utf8"
+echo ${CREATE_DB_SQL} | ${MYSQL_CMD}
+if [ $? -ne 0 ] ; then
+	echo "create databases ${DBNAME} fail..."
+	exit 1
+else
+	echo "create databases ${DBNAME} success!"
+	
+fi	
+
+
+#创建数据库表
+cd ${SQL_ROOT_DIR}
+mysql -h${HOSTNAME} -P${PORT} -u${USERNAME} -p${PASSWORD} ${DBNAME} < ${CREATE_TABLES_SQL}
+if [ $? -ne 0 ] ; then
+	echo "create tables ${DBNAME}.${CREATE_TABLES_SQL} fail..."
+else
+	echo "create tables ${DBNAME}.${CREATE_TABLES_SQL} success!"
+fi
+
+##要修改的sql语句文件
+#cd ${SQL_ROOT_DIR}
+#mysql -h${HOSTNAME} -p${PORT} -u${USERNAME} -p${PASSWORD} ${DBNAME} < ${ALTER_TABLES_SQL}
+#if [ $? -ne 0 ] ; then
+#	echo "alter tables ${DBNAME}.${ALTER_TABLES_SQL} fail..."
+#else
+#	echo "alter tables ${DBNAME}.${ALTER_TABLES_SQL} sucess!"
+#fi

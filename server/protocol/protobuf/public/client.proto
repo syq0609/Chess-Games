@@ -1,0 +1,546 @@
+syntax = "proto2";
+
+package PublicProto; 
+
+
+message S_ServerVersion
+{
+    required string version      = 1;
+    required bool apple_review   = 2; //是否是apple审核版, true 是, false 不是
+    optional bool strict_version = 3; //是否严格版本比对, true 是, false 不是
+    optional string ios_app_url       = 4; //
+    optional string android_app_url   = 5; //
+}
+
+//step 1,  client -> gw
+enum LoginType_C_Login
+{
+    LOGINT_VISTOR       = 0; //游客登录
+    LOGINT_WETCHAT      = 1; //微信登陆
+    LOGINT_HISTOLKEN    = 2; //历史token登陆, 暂时端没有用到
+}
+
+message C_Login
+{
+    required int32  login_type  = 1;  //登陆类型
+    required string openid      = 2;  //openid
+    required string token       = 3;  //token
+    required string nick_name   = 4;  //昵称
+    required string imgurl      = 5;  //头像地址
+    required int32  sex         = 6;  //性别
+    required string os          = 7;  //系统(验证不同的appid) ios or android
+}
+
+//step 2, gw -> client
+//登录结果返回
+enum RetCode_S_LoginRet
+{
+    LOGINR_FAILED           = 0;
+    LOGINR_SUCCES           = 1;
+    LOGINR_HISTOKEN_ILEGAL  = 2; //历史登陆且token不正确
+    LOGINR_WCHTTOKEN_ILEGAL = 3; //微信登录且token不正确
+}
+
+message S_LoginRet
+{
+    required int32  ret_code    = 1;
+    optional int64  cuid        = 2; //个人ID
+    optional string temp_token  = 3;
+    optional string ipstr       = 4;
+    optional string wechat1     = 5; //微信号1
+    optional string wechat2     = 6; //微信号2
+    optional string wechat3     = 7; //微信号3
+    optional string share_link  = 8; //分享的链接
+    repeated Price price_list   = 9; //不同局数的房间, 人头费列表
+    optional int32 max_player_size  = 10;//房间最大人数
+    repeated GameList game_list = 11;
+    optional string nick_name   = 12; //昵称
+    optional string imgurl      = 13; //头像
+    optional int32 sex          = 14; //性别
+    optional string wechat_share_title       = 15; //微信分享标题
+    optional string wechat_share_content     = 16; //微信分享内容
+
+    message Price
+    {
+        required int32 rounds   = 1;
+        required int32 money    = 2;
+    }
+    message GameList
+    {
+        required int32 gameid   = 1;    //游戏类型(十三水,牛牛)
+        required int32 goldMode = 2;
+        required int32 cardMode = 3;
+        required string url     = 4;    //游戏下载地址
+        required string version = 5;
+    }
+}
+
+message C_LoginOut
+{
+}
+
+//玩家基本数据
+message S_PlayerBasicData
+{
+    optional int32  money       = 1;    //货币1
+    optional int32  money1      = 2;    //货币2
+}
+
+
+//通知客户端显示系统级推送的文本
+message S_Notice
+{
+    enum Type
+    {
+        MSG_BOX = 1; //弹窗消息
+        NOTICE  = 2; //公告
+        MARQUEE = 3; //滚动提示
+    }
+    required Type   type = 1;
+    required string text = 2;
+}
+
+//聊天信息
+enum ChatType
+{
+    CHAT_TEXT  = 0;
+    CHAT_FACE  = 1;
+    CHAT_VOICE = 2;
+}
+
+message C_SendChat
+{
+    required ChatType   type        = 1; //聊天的内容类型
+    optional int64      data_int    = 3; //整形数据, 表情或语音id
+    optional string     data_text   = 4; //字符串型数据, 文字内容
+}
+
+message S_Chat
+{
+    required int64      cuid    = 1; //发送者
+    required C_SendChat content = 2; //内容
+}
+
+message CS_Heartbeat
+{
+}
+
+/*****************************13水消息********************************/
+
+//13水, 创建游戏, 即建房间, 成功则返回房间信息
+message C_G13_CreateGame
+{
+    required int32 player_size      = 1; //人数
+    required int32 play_type        = 2; //玩法 0:普通 1:坐庄 2:全一色
+    required int32 ma_pai           = 3; //马牌 0为不带
+    required int32 da_qiang         = 4; //打枪 +x      //为0表示翻倍
+    required int32 rounds           = 5; //局数
+    required int32 payor            = 6; //支付者, 0=庄家付, 1=均摊, 2=赢家付
+    required bool with_ghost        = 7; //带鬼
+    required bool  half_enter       = 8; //中场可进
+    required bool  is_crazy          = 9; //疯狂场
+    required int32 banker_multiple  = 10; //抢庄最高倍数
+    repeated int32 suits_colors     = 11;//空表示不加.增加的花色列表(黑3 红2 梅1 方0),2-4人只读第一个,5-8人全读
+    required int32 gold_place        = 12; //金币场底注
+    required int32 place_type        = 13; //中 高级场,对应配置id,服务器传给客户端区分类型使用
+}
+
+//加入房间
+message C_G13_JoinGame
+{
+    required int32 room_id    = 1;  //房号
+}
+
+//13水, 房间基本信息, 创建, 加入游戏成功的返回消息都是这一条
+message S_G13_RoomAttr
+{
+    required int32 room_id          = 1; //房号
+    required int64 banker_cuid      = 2; //庄家(房主)的唯一id
+    required C_G13_CreateGame attr  = 3; //房间属性
+}
+
+//更新房间成员状态列表, 只发送有变动的players
+//房间人员数量或状态发生变动后，会对当前所有成员广播这一消息
+message S_G13_PlayersInRoom
+{
+    enum Status
+    {
+        NONE    = 0; //空状态
+        PREP    = 1; //准备
+        READY   = 2; //就绪
+        SORT    = 3; //摆牌
+        COMPARE = 4; //比牌
+        DONE    = 5; //结束
+        WITNESS = 6; //观战
+        BANKER  = 7; //抢庄(手里已发8张牌)
+        SELMULTIPLE = 8; //选择倍率
+    }
+    message PlayerStatus
+    {
+        required int64 cuid     = 1; //cuid
+        required int32 status   = 2; //具体值见上面的枚举定义中的注释
+        required string name    = 3; //名字
+        required int32 rank     = 4; //当前分数
+        required string imgurl  = 5; //头像url
+        required string ipstr   = 6; //ip字符串
+        optional bool online    = 7; //是否在线 true==在线, false==离线
+    }
+    repeated PlayerStatus players   = 1;
+    required int32 rounds           = 2; //当前是第几局, 准备阶段值为0
+}
+
+//放弃游戏, 
+//在游戏开始阶段，庄家退出房间自动解散, 非庄家退出只有自己退出
+//在游戏进行阶段，退出游戏需要房间投票，通过后游戏自动终止
+//结算结束后，房间会保留30s，期间可以自由退出，房主退出不解散房间
+message C_G13_GiveUp
+{
+}
+
+enum G13_VoteOfAbort
+{
+    VT_NONE = 0;  //未投
+    VT_AYE  = 1;  //赞同
+    VT_NAY  = 2;  //反对
+};
+
+// 关于退出游戏投票的更新和通知
+// 收到消息如果自己还未投票，则现实投票界面
+message S_G13_AbortGameOrNot
+{
+    message Vote
+    {
+        required int64  cuid = 1;
+        required int32  vote = 2;
+    }
+    required int32 remain_seconds   = 1;//剩余秒数
+    required int64 sponsor          = 2;//发起者的cuid
+    repeated Vote  votes            = 3;//当前票列表
+}
+
+// 投票表决是否赞同终止游戏
+message C_G13_VoteFoAbortGame
+{
+    required G13_VoteOfAbort vote = 1;
+}
+
+// 投票失败, 游戏继续
+message S_G13_VoteFailed
+{
+    required int64 opponent = 1; //反对者的cuid
+}
+
+//玩家已离开游戏, 仅发给自己
+message S_G13_PlayerQuited
+{
+}
+
+
+//确定游戏开始
+message C_G13_ReadyFlag
+{
+    required bool ready    = 1; // true=设为就绪, false=设为未就绪
+}
+
+//拥有的牌(发牌的结果)
+message S_G13_HandOfMine
+{
+    required int32 rounds   = 1;
+    repeated int32 cards    = 2;
+}
+
+//确认出牌
+message C_G13_BringOut
+{
+    repeated int32 cards    = 1;
+    required bool special   = 2; //true 按照特殊牌型算; false 按照一般的牌型算
+}
+
+// 所有人的牌, 以及结算结果
+message S_G13_AllHands
+{
+    message BrandInfo //牌型信息
+    {
+        required int32 brand = 1; //牌型枚举
+        required int32 point = 2; //同牌型比大小的点数, 特殊牌型全为0, 等策划补文档
+        required int32 score = 3; //每墩基础分值
+    }
+    message Player
+    {
+        required int64      cuid  = 1;
+        repeated int32      cards = 2; //牌组
+        required int32      rank  = 3; //单局得分
+        required BrandInfo  dun0  = 4; //头墩
+        required BrandInfo  dun1  = 5; //中墩
+        required BrandInfo  dun2  = 6; //尾墩
+        required BrandInfo  spec  = 7; //特殊牌型
+    }
+    repeated Player players = 1;
+}
+
+// 所有局结束, 总结算 
+// 此消息发完, 游戏会在稍后自动解散, 期间可以自由离开
+message S_G13_AllRounds
+{
+    message Player
+    {
+        required int64  cuid        = 1;
+        required int32  win         = 2;    //胜利次数
+        required int32  daqiang     = 3;    //打枪次数
+        required int32  quanleida   = 4;    //全垒打次数, 非全垒打房间值一定为0
+        required int32  rank        = 5;    //总得分
+    }
+    repeated Player players = 1;
+}
+
+//请求历史总统计
+message C_G13_ReqGameHistoryCount
+{
+}
+
+//返回历史总统计
+message S_G13_GameHistoryCount
+{
+    required int32 total       = 1;  //总历史记录条目数量
+    required int32 week_rank   = 2;  //本周积分
+    required int32 week_game   = 3;  //本周场数
+    required int32 today_rank  = 4;  //今日积分
+    required int32 today_game  = 5;  //今日场数
+}
+
+//请求比赛历史详情
+message C_G13_ReqGameHistoryDetial
+{
+    required int32 page = 1; //页码, 从0开始
+}
+
+//返回比赛历史详情
+message S_G13_GameHistoryDetial
+{
+    message Game
+    {
+        message Opponent
+        {
+            required int64  cuid    = 1;
+            required string name    = 2;
+            required int32  rank    = 3;
+        }
+        required int32  roomid  = 1;
+        required int32  rank    = 2;
+        repeated Opponent opps  = 3;
+        required int32  time    = 4;
+    }
+
+    repeated Game items = 1;
+}
+
+//请求计算模拟牌局的结果
+message C_G13_SimulationRound
+{
+    message BringOutInfo
+    {
+        required uint64 cuid    = 1;
+        repeated int32 cards    = 2;
+        required bool special   = 3; //true 按照特殊牌型算; false 按照一般的牌型算
+    }
+    repeated BringOutInfo players = 1;
+}
+
+//返回模拟牌局的计算结果
+message S_G13_CalcRoundSimulationRet
+{
+    required S_G13_AllHands result = 1;
+}
+
+//微信分享活动的信息
+message S_G13_WechatSharingInfo
+{
+    required bool   is_active   = 1; //是否开启
+    required int32  award_money = 2; //奖励金钱
+}
+
+//微信分享成功
+message C_G13_OnShareAdvByWeChat
+{
+}
+
+message S_G13_CalcBestBrandType
+{
+    repeated int32  cards       = 1;
+    required uint64 serial_code = 2;
+}
+
+message C_G13_BestBrandType
+{
+    repeated int32  cards       = 1;
+    required uint64 serial_code = 2;
+}
+
+//请求验证购买数据
+message C_G13_Payment
+{
+    required string sid = 1;    // 商品id
+    required string tid = 2;    // 订单id
+    required string data = 3;   // 收据
+}
+
+message S_G13_PaymentRes
+{
+        required int32 result = 1;    // 服务器确认购买结果
+}
+
+/*****************************13水新加消息********************************/
+//房主快速开始请求(就是提前开始) 以及 投票确认
+message C_G13_QuickStart
+{
+}
+
+enum G13_VoteOfStart
+{
+    VS_NONE = 0;  //未投
+    VS_AYE  = 1;  //赞同
+    VS_NAY  = 2;  //反对
+};
+
+// 关于开始游戏投票的更新和通知
+// 收到消息如果自己还未投票，则现实投票界面
+message S_G13_QuickStartOrNot
+{
+    message Vote
+    {
+        required int64  cuid = 1;
+        required int32  vote = 2;
+    }
+    required int32 remain_seconds   = 1;//剩余秒数
+    repeated Vote  votes            = 3;//当前票列表
+}
+
+// 投票表决是否赞同提前开始游戏
+message C_G13_VoteForQuickStart
+{
+    required G13_VoteOfStart vote = 1;
+}
+
+// 投票失败, 等待人满
+message S_G13_VoteStartFailed
+{
+    required int64 opponent = 1; //反对者的cuid
+}
+
+// 抢庄选择倍率
+message C_G13_ChipInPoint
+{
+    required int32 point = 1;       //抢庄点数(不能超过房间配置)
+}
+
+message S_G13_ChipInInfo
+{
+    message Multiple
+    {
+        required int64  cuid = 1;
+        required int32  multiple = 2;
+    }
+    required int32 remain_seconds   = 1;//剩余秒数
+    repeated Multiple list          = 2;//倍率列表
+}
+
+// 抢庄庄家信息
+message S_G13_BankerInfo
+{
+    required int64 cuid   = 1;        //庄家id
+}
+
+// 闲家选择倍率
+message C_G13_SelectMultiple
+{
+    required int32 point = 1;
+}
+
+message S_G13_MultipleInfo
+{
+    message Multiple
+    {
+        required int64  cuid = 1;
+        required int32  multiple = 2;
+    }
+    required int32 remain_seconds   = 1;//剩余秒数
+    repeated Multiple list          = 2;//倍率列表
+}
+
+//续费重开
+message C_G13_RenewRoom
+{
+    required int32 payor = 1; //支付类型 0:自己付 1:AA
+}
+
+message S_G13_RenewNotice
+{
+    required int64  cuid = 1;   //申请续局的玩家
+    required int32 payor = 2;   //支付类型 0:自己付 1:AA
+}
+
+//续局回复
+message C_G13_RenewReply
+{
+    required bool reply  = 1;   //true:同意 false:拒绝
+}
+
+//处理中途加入玩家
+message C_G13_ReplyHalfEnter
+{
+    required int64  cuid    = 1; //玩家id
+    required bool   reply   = 2; //1:同意 0:拒绝
+}
+
+/*****************************13水金币场协议********************************/
+//获取十三水开放的金币游戏场次
+message C_G13Gold_GetOpenPlace
+{
+}
+
+//返回13水金币场开放的场次
+message S_G13Gold_OpenPlaceInfo
+{
+    repeated PlaceInfo place_list = 1; //不同规则的房间
+
+    message PlaceInfo
+    {
+        required int32 id = 1;
+        required int32 player_size = 2;
+        required int32 score = 3;
+        required int32 max = 4;
+    }
+}
+
+//进入指定场次(中级 高级 大师场)
+message C_G13_EnterGoldPlace
+{
+    required int32 place_id    = 1;  //场次id
+}
+
+//换桌
+message C_G13Gold_ChangeRoom
+{
+}
+
+//快速开始(金币场的随机分配房间)
+message C_G13Gold_QuickStart
+{
+}
+
+message S_G13_SettleTime
+{
+    required int32 remain_seconds   = 1;//剩余秒数
+}
+
+//金币购买
+message C_Exchange
+{
+    required string key = 1;        //商品id
+}
+
+message S_Exchange
+{
+        required int32 result = 1;      // 服务器确认购买结果
+}
+

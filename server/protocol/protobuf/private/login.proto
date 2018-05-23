@@ -1,0 +1,51 @@
+syntax = "proto2";
+
+package PrivateProto;
+
+// step 2, gw -> lo
+message LoginQuest
+{
+    required bool   verified    = 1;
+    required string openid      = 2;
+    required string token       = 3;
+    required uint64 ccid        = 4;
+    required string name        = 5;
+    required string imgurl      = 6;
+    required string ipstr       = 7;
+    required uint32 sex         = 8;
+};
+
+
+// step 2,  lo -> gw
+enum RetLoginQuest_RetCode
+{
+    RLQ_REG_FAILED      = 0; //失败
+    RLQ_SUCCES          = 1; //成功
+    RLQ_BAND            = 2; //封号
+    RLQ_TOKEN_EXPIRIED  = 4; //token过期
+}
+message RetLoginQuest
+{
+    required uint32 ret_code = 1;  //RetLoginQuest_RetCode
+    required uint64 ccid     = 2;
+    optional uint64 cuid     = 3;
+    optional string openid   = 4;
+    required uint32 roomid   = 5;
+    optional string nick_name= 6;
+    optional string imgurl   = 7;
+    optional uint32 sex      = 8;
+}
+
+// lo -> gw
+message ClientBeReplaced
+{
+    required int64 ccid = 1;
+    required int64 cuid = 2;
+    required string openid = 3;
+}
+
+// gw -> lo
+message ClientDisconnected
+{
+    required int64 ccid = 1;
+}

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!--注意： 每次修改需要动态加载  version 后面的数值必须大于前面的数值，例如：首次填1 后面必须填2   -->
+<root version="100021">
+    <!--version  服务器版本号  appleReview 审核开关  true 开启审核（1-打开游客模式） ，false（0-关闭游客模式） strictversion 强版本验证模式, true（1）的话, 版本比服务器低禁止进游戏, false（0）的话提示升级, 但是>可以进去-->
+    <version version="1.0.0" appleReview="1" strictVersion="0" iosAppUrl="http://52ckhome.com/download/xxx.html" androidAppUrl="http://52ckhome.com/download/xxx.html"/>
+    <gameList>
+        <!-- 游戏列表(包含已开与未开) -->
+        <item gameid="1" goldMode="1" cardMode="1" url="http://192.168.0.101:81/juwangames/shisanshui" version="1.0.0"/>
+        <item gameid="2" goldMode="0" cardMode="1" url="http://192.168.0.101:81/juwangames/niuniu" version="1.0.0"/>
+        <item gameid="3" goldMode="0" cardMode="1" url="http://192.168.0.101:81/juwangames/niuniu" version="1.0.0"/>
+        <item gameid="4" goldMode="0" cardMode="1" url="http://192.168.0.101:81/juwangames/niuniu" version="1.0.0"/>
+        <item gameid="5" goldMode="0" cardMode="1" url="http://192.168.0.101:81/juwangames/niuniu" version="1.0.0"/>
+    </gameList>
+    <!--客服信息设置 -->
+    <customService wechat1="xmdz8899" wechat2="xmdz8866" wechat3="斗阵游十三水" shareLink="http://www.xmgwo.com/weixin.html"/>
+
+    <!-- 微信分享格式 -->
+    <wechatShare title="roomId,play_type" content="player_size,rounds,ma_pai,payor,da_qiang,with_ghost,banker_multiple"/>
+
+    <systemNotice>
+       <!--公告  salution 标题  body 正文  singnature 标签  date  日期 -->
+        <!--announcementBoard salution="亲爱的玩家：" body="欢迎来到斗阵游棋牌世界，在这里我们一起斗阵游戏吧！斗阵游戏仅提供休闲娱乐，如发现任何形式赌博行为，将封停帐号。斗阵游诚招代理商请咨询微信：xmdz8899,xmdz8866" signature="斗阵十三水官方运营团队" date="2017年10月14日"/-->
+      <!--跑马灯公告 -->
+        <!--marquee text="斗阵游十三水诚招代理商，详情请咨询微信：xmdz8899,xmdz8866"/-->
+        <announcementBoard salution="亲爱的玩家：" body="调试机器人" signature="!!" date="222"/>
+      <!--跑马灯公告 -->
+        <marquee text="~~~"/>
+    </systemNotice>
+
+    <pricePerPlayer>
+        <!--创建房间费用配置 round 是局数  money 是 价格，这里是人头费 -->
+        <item rounds="10" money="8"/>
+        <item rounds="20" money="12"/>
+        <item rounds="30" money="16"/>
+    </pricePerPlayer>
+
+    <roomPropertyLimits maxPlayerSize="8"/>
+
+    <mapaiPattern brand1="1" brand2="2" brand3="3"/>
+
+    <shootAddPoint point="1"/>
+    <!--分享送钻石   begin 开始时间    end  结束时间     awardmoney  赠送的钻石-->
+    <shareByWeChat begin="20171024-00:00:00" end="20171107-00:00:00" awardMoney="28"/>
+
+    <!--牌规则说明:
+         花色: {黑,红,梅,方} ->  {3,2,1,0}
+         点数: [2,3,4 ... K, A] ->  [1, 2, 3, ... 12, 13]
+
+         一张牌的数值: (花色 * 13) + 点数
+
+
+     你个表格:
+                 2          3          4          5          6          7          8          9          X          J          Q          K          A   
+
+    方块:        1          2          3          4          5          6          7          8          9         10         11         12         13   
+
+    梅花:       14         15         16         17         18         19         20         21         22         23         24         25         26   
+
+    红桃:       27         28         29         30         31         32         33         34         35         36         37         38         39   
+
+    黑桃:       40         41         42         43         44         45         46         47         48         49         50         51         52 
+
+           发牌时每人顺次领13张, 为应对多一色玩法, 请保证配够65张, 服务器不检查牌组的正确性
+           配置例子: 多一色, 方块2开始黑桃A结束
+                照例子配置, 每人都会得到一手 青龙
+                <deck cards="1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,40,41,42,43,44,45,46,47,48,49,50,51,52"/> 
+         -->
+    <!--测试牌型 ，慎填， index >=0 生效  第一行编号是0, 第二行是1, 依此类推, index配哪一行就发哪一行 -->
+    <testDeck index="-1">
+        <deck cards="1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,40,41,42,43,44,45,46,47,48,49,50,51,52"/>
+        <deck cards="1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,40,41,42,43,44,45,46,47,48,49,50,51,52"/>
+        <deck cards="1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,40,41,42,43,44,45,46,47,48,49,50,51,52"/>
+        <deck cards="1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,40,41,42,43,44,45,46,47,48,49,50,51,52"/>
+        <deck cards="1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,40,41,42,43,44,45,46,47,48,49,50,51,52"/>
+        <deck cards="1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,40,41,42,43,44,45,46,47,48,49,50,51,52"/>
+        <deck cards="1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,40,41,42,43,44,45,46,47,48,49,50,51,52"/>
+        <deck cards="1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,40,41,42,43,44,45,46,47,48,49,50,51,52"/>
+    </testDeck>
+
+    <iosPayment switch="1">
+        <!-- ios充值钻石 gooidsId 是 商品id, awardMoney 是 钻石数量 -->
+        <item goodsId="com.sygames.60diamond" baseMoney="60" awardMoney="0"/>
+        <item goodsId="com.sygames.300diamond" baseMoney="300" awardMoney="0"/>
+        <item goodsId="com.sygames.910diamond" baseMoney="880" awardMoney="0"/>
+        <item goodsId="com.sygames.1650diamondd" baseMoney="1650" awardMoney="0"/>
+        <item goodsId="com.sygames.3440diamond" baseMoney="3440" awardMoney="0"/>
+        <item goodsId="com.sygames.7379diamond" baseMoney="7379" awardMoney="0"/>
+    </iosPayment>
+
+    <goldExchange>
+        <!-- 金币充值 -->
+        <item itemId="com.sygames.50000gold" diamond="50" awardMoney="50000"/>
+        <item itemId="com.sygames.200000gold" diamond="200" awardMoney="200000"/>
+        <item itemId="com.sygames.500000gold" diamond="500" awardMoney="500000"/>
+        <item itemId="com.sygames.1600000gold" diamond="1600" awardMoney="1600000"/>
+        <item itemId="com.sygames.3400000gold" diamond="3400" awardMoney="3400000"/>
+        <item itemId="com.sygames.7300000gold" diamond="7300" awardMoney="7300000"/>
+    </goldExchange>
+
+    <!-- 十三水金币场房间规则 -->
+    <water13RoomRule>
+        <!-- score:底注 min:进入下限金币数 max:进入上限 status:开放状态(显示状态,策划决定) playType:玩法(0普通,1抢庄) daQiang:开启打抢+1(1或0) playerSize:房间人数 maPai:1-52 withGhost:带鬼(1或0) bankerMultiple(抢庄最大倍率) -->
+        <item id="1" score="100" min="1" max="1000000" status="1" playType="0" daQiang="1" playerSize="3" maPai="0" withGhost="0" bankerMultiple="0"/>
+        <item id="2" score="100" min="200" max="3000000" status="1" playType="0" daQiang="1" playerSize="3" maPai="0" withGhost="0" bankerMultiple="0"/>
+        <item id="3" score="100" min="300" max="4000000" status="1" playType="0" daQiang="1" playerSize="3" maPai="0" withGhost="0" bankerMultiple="0"/>
+    </water13RoomRule>
+</root>
+

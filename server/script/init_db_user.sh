@@ -1,0 +1,19 @@
+
+#!/bin/bash
+
+ADMIN="root"
+ADMINPWD="111111"
+
+
+
+USERNAME="water"
+USERPWD="111111"
+DBNAME="game"
+
+sqlcmd="
+CREATE USER '$USERNAME'@'%' IDENTIFIED BY '$USERPWD';
+GRANT ALL ON $DBNAME.* TO '$USERNAME'@'%';
+FLUSH PRIVILEGES;"
+
+
+echo $sqlcmd | mysql -u$ADMIN -p$ADMINPWD

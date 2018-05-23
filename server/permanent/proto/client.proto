@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package permanent;
+
+message ClientData
+{
+    string  openid  = 1;
+    int64   cuid    = 2;
+    string  name    = 3;
+    uint32  roomid  = 4;
+    uint32  roomtp  = 5;
+    int32   money   = 6;
+    int32   money1  = 7;
+}
+

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+
+    <!-- TODO, mysql的配置应该放到需要连mysql的进程的自有配置中-->
+    <redis host ="127.0.0.1" port="6379" passwd="111111"/>
+
+    <allProcesses allType="platform router gateway lobby hall">
+        <!--网关服务器-->
+        <processType name="gateway">
+            <process num="1">
+                <private listen="" connectTo="router:1"/>
+                <public  listen="0.0.0.0:7000"/>
+                <http    listen="0.0.0.0:8001"/>
+            </process>
+        </processType>
+
+        <!--大厅服务器-->
+        <processType name="lobby">
+            <process num="1">
+                <private listen="" connectTo="router:1"/>
+            </process>
+        </processType>
+
+        <!--路由服务器-->
+        <processType name="router">
+            <process num="1">
+                <private listen="127.0.0.1:6000" connectTo=""/>
+            </process>
+        </processType>
+    </allProcesses>
+</root>

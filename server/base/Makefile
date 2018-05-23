@@ -1,0 +1,58 @@
+objects = \
+    \
+	shell_arg_parser.o\
+    tcp_client.o\
+    tcp_server.o\
+    process_config.o\
+    process_id.o\
+    process_thread.o\
+	private_connection_checker.o\
+    tcp_connection_manager.o\
+    process_timer.o\
+    process.o\
+	flash_sanbox_handler.o\
+	http_connection_manager.o\
+
+
+
+CC = g++
+cc = g++
+
+cc_flags = -std=c++11 -g -Wall -Werror $(optimization_flag) \
+		   -I$(BASE_DIR)
+ln_flags = -lpthread 
+#-Lnet -lnet -Lcomponet -lcomponet
+
+target = libbase.a
+
+.PHONY:
+all: $(target)
+
+$(target) : $(objects)
+#	@set -e -x; \
+#	echo $(ln_flags)
+#	g++ $(objects) $(ln_flags) -o $(target) 
+	ar rs $(target) $(objects)
+
+%.o: %.cpp
+	$(cc) $(cc_flags) -c $< -o $@
+
+%.d: %.cpp
+#此行用于调试	@set -e -x; \ #此行用于调试
+	@rm -f $@; \
+	$(cc) $(cc_flags) -MM $< > $@.$$$$;  \
+	sed -r 's,^(.*)\.o:,$@ $*\.o:,' $@.$$$$ > $@;  \
+	rm -f $@.$$$$
+
+ifneq ($(MAKECMDGOALS), clean)
+ifneq ($(MAKECMDGOALS), distclean)
+-include $(objects:.o=.d)
+endif
+endif
+
+.PHONY: clean distclean
+clean:
+	rm -f $(objects) $(objects:.o=.d) *.d *.d.* 
+	rm -f $(target)
+
+distclean: clean
