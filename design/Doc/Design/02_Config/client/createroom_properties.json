@@ -1,0 +1,503 @@
+[{
+    "gameIndex": "0",
+    "gameName": "十三水",
+    "texture": "Textures/createRoom/shisanshui-0",
+    "detailConfig": {
+        "playtype0": {
+            "name": "经典玩法",
+            "rules": {
+                "rule0": {
+                    "name": "人数",
+                    "multiSelect": "0",
+                    "props": {
+                        "prop0": {
+                            "id": "0",
+                            "name": "8人",
+                            "tips": "房间人数上限8人",
+                            "default": "true",
+                            "key": "player_size",
+                            "val": "8"
+                        },
+                        "prop1": {
+                            "id": "1",
+                            "name": "7人",
+                            "tips": "房间人数上限7人",
+                            "key": "player_size",
+                            "val": "7"
+                        },
+                        "prop2": {
+                            "id": "2",
+                            "name": "6人",
+                            "tips": "房间人数上限6人",
+                            "key": "player_size",
+                            "val": "6"
+                        },
+                        "prop3": {
+                            "id": "3",
+                            "name": "5人",
+                            "tips": "房间人数上限5人",
+                            "key": "player_size",
+                            "val": "5"
+                        },
+                        "prop4": {
+                            "id": "4",
+                            "name": "4人",
+                            "tips": "房间人数上限4人",
+                            "key": "player_size",
+                            "val": "4"
+                        },
+                        "prop5": {
+                            "id": "5",
+                            "name": "3人",
+                            "tips": "房间人数上限3人",
+                            "key": "player_size",
+                            "val": "3"
+                        },
+                        "prop6": {
+                            "id": "6",
+                            "name": "2人",
+                            "tips": "房间人数上限2人",
+                            "key": "player_size",
+                            "val": "2"
+                        }
+                    }
+                },
+
+                "rule1": {
+                    "name": "规则",
+                    "multiSelect": "1",
+                    "props": {
+                        "prop0": {
+                            "id": "0",
+                            "name": "带鬼",
+                            "tips": "鬼牌为大小王,可替代任何牌",
+                            "default": "false",
+                            "key": "with_ghost",
+                            "val": "0"
+                        },
+                        "prop1": {
+                            "id": "1",
+                            "name": "打枪+1",
+                            "tips": "打枪翻倍",
+                            "key": "da_qiang",
+                            "val": "0"
+                        },
+                        "prop2": {
+                            "id": "2",
+                            "name": "中途可进",
+                            "tips": "允许中途加入房间",
+                            "key": "half_enter",
+                            "val": "0"
+                        },
+                        "prop3": {
+                            "id": "3",
+                            "name": "疯狂场",
+                            "tips": "一次发13张牌,不一张张随机发",
+                            "key": "is_crazy",
+                            "val": "0"
+                        },
+                        "prop4": {
+                            "id": "4",
+                            "name": "带马",
+                            "tips": "拥有马牌的玩家,结算翻倍,不论输赢",
+                            "default": "false",
+                            "extra": {
+                                "used": "1",
+                                "canSelect": "1",
+                                "multiSelect": "0",
+                                "sprites": {
+                                    "sprite0": {
+                                        "isCard": "1",
+                                        "texture": "0",
+                                        "suits": "R",
+                                        "default": "true",
+                                        "key": "ma_pai",
+                                        "val": "1"
+                                    },
+                                    "sprite1": {
+                                        "isCard": "1",
+                                        "texture": "0",
+                                        "suits": "B",
+                                        "key": "ma_pai",
+                                        "val": "2"
+                                    },
+                                    "sprite2": {
+                                        "isCard": "1",
+                                        "texture": "A",
+                                        "suits": "D",
+                                        "key": "ma_pai",
+                                        "val": "3"
+                                    }
+                                }
+                            },
+                            "key": "ma_pai",
+                            "val": "0"
+                        },
+                        "prop5": {
+                            "id": "5",
+                            "name": "加多色",
+                            "tips": "每加1色,多13张牌;花色可自主选择,加多色受人数限制",
+                            "default": "false",
+                            "extra": {
+                                "used": "1",
+                                "canSelect": "1",
+                                "multiSelect": "1",
+                                "sprites": {
+                                    "sprite0": {
+                                        "isCard": "0",
+                                        "texture": "Textures/Card/bei-D",
+                                        "suits": "",
+                                        "default": "true",
+                                        "key": "suits_colors",
+                                        "val": "0"
+
+                                    },
+                                    "sprite1": {
+                                        "isCard": "0",
+                                        "texture": "Textures/Card/bei-C",
+                                        "suits": "",
+                                        "default": "true",
+                                        "key": "suits_colors",
+                                        "val": "2"
+                                    },
+                                    "sprite2": {
+                                        "isCard": "0",
+                                        "texture": "Textures/Card/bei-H",
+                                        "suits": "D",
+                                        "key": "suits_colors",
+                                        "val": "3"
+                                    },
+                                    "sprite3": {
+                                        "isCard": "0",
+                                        "texture": "Textures/Card/bei-S",
+                                        "suits": "C",
+                                        "key": "suits_colors",
+                                        "val": "1"
+                                    }
+                                }
+                            },
+                            "key": "suits_colors",
+                            "val": "0"
+                        }
+                    }
+                },
+                "rule2": {
+                    "name": "局数",
+                    "multiSelect": "0",
+                    "props": {
+                        "prop0": {
+                            "id": "0",
+                            "name": "10局",
+                            "tips": "对战回合数10局",
+                            "default": "true",
+                            "key": "rounds",
+                            "val": "10"
+                        },
+                        "prop1": {
+                            "id": "1",
+                            "name": "20局",
+                            "tips": "对战回合数20局",
+                            "key": "rounds",
+                            "val": "20"
+                        },
+                        "prop2": {
+                            "id": "2",
+                            "name": "30局",
+                            "tips": "对战回合数30局",
+                            "key": "rounds",
+                            "val": "30"
+                        }
+                    }
+                },
+
+                "rule3": {
+                    "name": "支付",
+                    "multiSelect": "0",
+                    "props": {
+                        "prop0": {
+                            "id": "0",
+                            "name": "房主支付",
+                            "tips": "由房主(创建者)支付房费",
+                            "default": "true",
+                            "key": "payor",
+                            "val": "0"
+                        },
+                        "prop1": {
+                            "id": "1",
+                            "name": "平摊支付",
+                            "tips": "由房间内玩家平摊房费",
+                            "key": "payor",
+                            "val": "1"
+                        },
+                        "prop2": {
+                            "id": "2",
+                            "name": "大赢家支付",
+                            "tips": "由最后的赢家支付房费",
+                            "key": "payor",
+                            "val": "2"
+                        }
+                    }
+                }
+            }
+        },
+        "playtype1": {
+            "name": "抢庄玩法",
+            "rules": {
+                "rule0": {
+                    "name": "人数",
+                    "multiSelect": "0",
+                    "props": {
+                        "prop0": {
+                            "id": "0",
+                            "name": "8人",
+                            "tips": "房间人数上限8人",
+                            "default": "true",
+                            "key": "player_size",
+                            "val": "8"
+                        },
+                        "prop1": {
+                            "id": "1",
+                            "name": "7人",
+                            "tips": "房间人数上限7人",
+                            "key": "player_size",
+                            "val": "7"
+                        },
+                        "prop2": {
+                            "id": "2",
+                            "name": "6人",
+                            "tips": "房间人数上限6人",
+                            "key": "player_size",
+                            "val": "6"
+                        },
+                        "prop3": {
+                            "id": "3",
+                            "name": "5人",
+                            "tips": "房间人数上限5人",
+                            "key": "player_size",
+                            "val": "5"
+                        },
+                        "prop4": {
+                            "id": "4",
+                            "name": "4人",
+                            "tips": "房间人数上限4人",
+                            "key": "player_size",
+                            "val": "4"
+                        },
+                        "prop5": {
+                            "id": "5",
+                            "name": "3人",
+                            "tips": "房间人数上限3人",
+                            "key": "player_size",
+                            "val": "3"
+                        },
+                        "prop6": {
+                            "id": "6",
+                            "name": "2人",
+                            "tips": "房间人数上限2人",
+                            "key": "player_size",
+                            "val": "2"
+                        }
+                    }
+                },
+
+                "rule1": {
+                    "name": "规则",
+                    "multiSelect": "1",
+                    "props": {
+                        "prop0": {
+                            "id": "0",
+                            "name": "带鬼",
+                            "tips": "鬼牌为大小王,可替代任何牌",
+                            "default": "false",
+                            "key": "with_ghost",
+                            "val": "0"
+                        },
+                        "prop1": {
+                            "id": "1",
+                            "name": "打枪+1",
+                            "tips": "打枪翻倍",
+                            "key": "da_qiang",
+                            "val": "0"
+                        },
+                        "prop2": {
+                            "id": "2",
+                            "name": "中途可进",
+                            "tips": "允许中途加入房间",
+                            "key": "half_enter",
+                            "val": "0"
+                        },
+                        "prop3": {
+                            "id": "4",
+                            "name": "带马",
+                            "tips": "拥有马牌的玩家,结算翻倍,不论输赢",
+                            "default": "false",
+                            "extra": {
+                                "used": "1",
+                                "canSelect": "1",
+                                "multiSelect": "0",
+                                "sprites": {
+                                    "sprite0": {
+                                        "isCard": "1",
+                                        "texture": "0",
+                                        "suits": "R",
+                                        "default": "true",
+                                        "key": "ma_pai",
+                                        "val": "1"
+                                    },
+                                    "sprite1": {
+                                        "isCard": "1",
+                                        "texture": "0",
+                                        "suits": "B",
+                                        "key": "ma_pai",
+                                        "val": "2"
+                                    },
+                                    "sprite2": {
+                                        "isCard": "1",
+                                        "texture": "A",
+                                        "suits": "D",
+                                        "key": "ma_pai",
+                                        "val": "3"
+                                    }
+                                }
+                            },
+                            "key": "ma_pai",
+                            "val": "0"
+                        },
+                        "prop4": {
+                            "id": "5",
+                            "name": "加多色",
+                            "tips": "每加1色,多13张牌;花色可自主选择,加多色受人数限制",
+                            "default": "false",
+                            "extra": {
+                                "used": "1",
+                                "canSelect": "1",
+                                "multiSelect": "1",
+                                "sprites": {
+                                    "sprite0": {
+                                        "isCard": "0",
+                                        "texture": "Textures/Card/bei-D",
+                                        "suits": "",
+                                        "default": "true",
+                                        "key": "suits_colors",
+                                        "val": "0"
+
+                                    },
+                                    "sprite1": {
+                                        "isCard": "0",
+                                        "texture": "Textures/Card/bei-C",
+                                        "suits": "",
+                                        "default": "true",
+                                        "key": "suits_colors",
+                                        "val": "2"
+                                    },
+                                    "sprite2": {
+                                        "isCard": "0",
+                                        "texture": "Textures/Card/bei-H",
+                                        "suits": "D",
+                                        "key": "suits_colors",
+                                        "val": "3"
+                                    },
+                                    "sprite3": {
+                                        "isCard": "0",
+                                        "texture": "Textures/Card/bei-S",
+                                        "suits": "C",
+                                        "key": "suits_colors",
+                                        "val": "1"
+                                    }
+                                }
+                            },
+                            "key": "suits_colors",
+                            "val": "0"
+                        }
+                    }
+                },
+                "rule2": {
+                    "name": "局数",
+                    "multiSelect": "0",
+                    "props": {
+                        "prop0": {
+                            "id": "0",
+                            "name": "10局",
+                            "tips": "对战回合数10局",
+                            "default": "true",
+                            "key": "rounds",
+                            "val": "10"
+                        },
+                        "prop1": {
+                            "id": "1",
+                            "name": "20局",
+                            "tips": "对战回合数20局",
+                            "key": "rounds",
+                            "val": "20"
+                        },
+                        "prop2": {
+                            "id": "2",
+                            "name": "30局",
+                            "tips": "对战回合数30局",
+                            "key": "rounds",
+                            "val": "30"
+                        }
+                    }
+                },
+
+                "rule3": {
+                    "name": "支付",
+                    "multiSelect": "0",
+                    "props": {
+                        "prop0": {
+                            "id": "0",
+                            "name": "房主支付",
+                            "tips": "由房主(创建者)支付房费",
+                            "default": "true",
+                            "key": "payor",
+                            "val": "0"
+                        },
+                        "prop1": {
+                            "id": "1",
+                            "name": "平摊支付",
+                            "tips": "由房间内玩家平摊房费",
+                            "key": "payor",
+                            "val": "1"
+                        },
+                        "prop2": {
+                            "id": "2",
+                            "name": "大赢家支付",
+                            "tips": "由最后的赢家支付房费",
+                            "key": "payor",
+                            "val": "2"
+                        }
+                    }
+                },
+	                "rule4": {
+                    "name": "倍数",
+                    "multiSelect": "0",
+                    "props": {
+                        "prop0": {
+                            "id": "0",
+                            "name": "3倍",
+                            "tips": "下注区间1-3倍",
+                            "default": "true",
+                            "key": "payor",
+                            "val": "0"
+                        },
+                        "prop1": {
+                            "id": "1",
+                            "name": "4倍",
+                            "tips": "下注区间1-4倍",
+                            "key": "payor",
+                            "val": "1"
+                        },
+                        "prop2": {
+                            "id": "2",
+                            "name": "5倍",
+                            "tips": "下注区间1-5倍",
+                            "key": "payor",
+                            "val": "2"
+                        }
+                    }
+                }			
+            }
+        }
+    }
+}
+] 

@@ -1,0 +1,112 @@
+{
+    "diamond": [{
+            "id": "0",
+            "itemId": "com.sygames.60diamond",
+            "captailName": "diamond",
+            "captialCost": "6",
+            "captialIcon": "",
+            "getValue": "60",
+            "itemIcon": "Textures/shop/zuanshitu-0"
+        },
+        {
+            "id": "1",
+            "itemId": "com.sygames.300diamond",
+            "captailName": "diamond",
+            "captialCost": "30",
+            "captialIcon": "",
+            "getValue": "300",
+            "itemIcon": "Textures/shop/zuanshitu-1"
+        },
+	        {
+            "id": "2",
+            "itemId": "com.sygames.910diamond",
+            "captailName": "diamond",
+            "captialCost": "88",
+            "captialIcon": "",
+            "getValue": "880",
+            "itemIcon": "Textures/shop/zuanshitu-1"
+        },
+        {
+            "id": "3",
+            "itemId": "com.sygames.1650diamondd",
+            "captailName": "diamond",
+            "captialCost": "158",
+            "captialIcon": "",
+            "getValue": "1650",
+            "itemIcon": "Textures/shop/zuanshitu-1"
+        },
+        {
+            "id": "4",
+            "itemId": "com.sygames.3440diamond",
+            "captailName": "diamond",
+            "captialCost": "328",
+            "captialIcon": "",
+            "getValue": "3440",
+            "itemIcon": "Textures/shop/zuanshitu-1"
+        },
+        {
+            "id": "5",
+            "itemId": "com.sygames.7379diamond",
+            "captailName": "diamond",
+            "captialCost": "698",
+            "captialIcon": "",
+            "getValue": "7379",
+            "itemIcon": "Textures/shop/zuanshitu-1"
+        }	
+    ],
+    "gold": [{
+            "id": "0",
+            "itemId": "com.sygames.50000gold",
+            "captailName": "gold",
+            "captialCost": "50",
+            "captialIcon": "",
+            "getValue": "50000",
+            "itemIcon": "Textures/shop/jinbitu-0"
+        },
+        {
+            "id": "1",
+            "itemId": "com.sygames.200000gold",
+            "captailName": "gold",
+            "captialCost": "200",
+            "captialIcon": "",
+            "getValue": "200000",
+            "itemIcon": "Textures/shop/jinbitu-1"
+        },
+        {
+            "id": "2",
+            "itemId": "com.sygames.500000gold",
+            "captailName": "diamond",
+            "captialCost": "500",
+            "captialIcon": "",
+            "getValue": "500000",
+            "itemIcon": "Textures/shop/jinbitu-2"
+        },
+        {
+            "id": "3",
+            "itemId": "com.sygames.1600000gold",
+            "captailName": "diamond",
+            "captialCost": "1600",
+            "captialIcon": "",
+            "getValue": "1600000",
+            "itemIcon": "Textures/shop/jinbitu-3"
+        },
+        {
+            "id": "4",
+            "itemId": "com.sygames.3400000gold",
+            "captailName": "diamond",
+            "captialCost": "3400",
+            "captialIcon": "",
+            "getValue": "3400000",
+            "itemIcon": "Textures/shop/jinbitu-4"
+        },
+        {
+            "id": "5",
+            "itemId": "com.sygames.7300000gold",
+            "captailName": "diamond",
+            "captialCost": "7300",
+            "captialIcon": "",
+            "getValue": "7300000",
+            "itemIcon": "Textures/shop/jinbitu-5"
+        }
+    ]
+}
